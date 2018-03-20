@@ -1,10 +1,12 @@
 package uvce.com.impetus;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,6 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
         errorField = findViewById(R.id.errorField);
+        Button button = (Button) findViewById(R.id.signupButton);
+        button.setPaintFlags(button.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     @Override
