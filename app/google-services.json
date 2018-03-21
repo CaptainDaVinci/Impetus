@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "429257919762",
+    "firebase_url": "https://impetus-e6647.firebaseio.com",
+    "project_id": "impetus-e6647",
+    "storage_bucket": "impetus-e6647.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429257919762:android:20c9c1bd93e1a447",
+        "android_client_info": {
+          "package_name": "uvce.com.impetus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "429257919762-vs1b866kp0ial3ar482hbhecraplaa9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uvce.com.impetus",
+            "certificate_hash": "2f9f86f4d545ac3d1a17cab9313a802c65250c71"
+          }
+        },
+        {
+          "client_id": "429257919762-i0p3h2cnuh3so9e1r4hel5li5qk5tlga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfBe7Pzf45Meo6A7SgNhEbe7vXgxbxjbI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "429257919762-i0p3h2cnuh3so9e1r4hel5li5qk5tlga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
