@@ -3,7 +3,7 @@ package uvce.com.impetus;
 public class Event {
     private int id;
     private String name, description;
-    Coordinator coordinator;
+    private Coordinator coordinator;
     private int rounds;
     private String startTime, endTime;
 

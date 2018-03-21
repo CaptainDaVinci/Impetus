@@ -5,9 +5,38 @@
     android:padding="10dp">
 
     <EditText
+        android:id="@+id/nameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"/>
+
+    <EditText
+        android:id="@+id/collegeField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameField"
+        android:hint="College"/>
+
+    <EditText
+        android:id="@+id/branchField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/collegeField"
+        android:hint="Branch"/>
+
+    <EditText
+        android:id="@+id/yearField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/branchField"
+        android:inputType="number"
+        android:hint="Year"/>
+
+    <EditText
         android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/yearField"
         android:inputType="textEmailAddress"
         android:hint="Email"/>
 
@@ -18,7 +47,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password"/>
-    
+
     <TextView
         android:id="@+id/errorField"
         android:layout_width="wrap_content"
@@ -27,32 +56,15 @@
         android:layout_marginTop="10dp"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="gone"/>
-    
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/errorField"
-        android:text="Login"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick"/>
-    
-    <TextView
-        android:id="@+id/msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="Don't have an account?"
-        android:layout_below="@+id/loginButton"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"/>
-    
+
+
     <Button
         android:id="@+id/signupButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:text="sign up"
-        android:layout_below="@id/msg"
+        android:layout_below="@id/errorField"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
-        android:onClick="onClick"/>
+        android:background="@android:color/transparent"/>
+
 </RelativeLayout>
