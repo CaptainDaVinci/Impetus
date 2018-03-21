@@ -1,22 +1,26 @@
 package uvce.com.impetus;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import java.util.regex.*;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = "APPATHON";
-
-    private DatabaseReference mDatabase;
-    private User user;
 
     private EditText emailField;
     private EditText passwordField;
@@ -29,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Log.d(TAG, "Login started");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
         errorField = findViewById(R.id.errorField);
@@ -41,7 +44,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.loginButton:
-                Log.d(TAG, "Login button clicked");
                 handleLogin(emailField.getText().toString(), passwordField.getText().toString());
                 break;
 
@@ -59,8 +61,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void handleLogin(String email, String password) {
+        Log.d(TAG, "validating input data");
+
         if (email.isEmpty() || password.isEmpty()) {
-            Log.d(TAG, "Email or password is empty");
             showError(1);
             return;
         }
@@ -71,15 +74,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        if (invalidCredential(email, password)) {
-            Log.d(TAG, "Invalid credential");
-            showError(3);
-            return ;
-        }
+        Log.d(TAG, "Looking for " + email + " with " + password);
+        validateCredentials(email, password);
     }
 
-    private boolean invalidCredential(String email, String password) {
-        return false;
+    private void validateCredentials(final String email, final String password) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
+        Query userQuery = userRef.orderByChild("email").equalTo(email);
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean found = false;
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "Got: " + snapshot.toString());
+                    User user = snapshot.getValue(User.class);
+                    assert user != null;
+                    if (Objects.equals(user.getEmail(), email) &&
+                            Objects.equals(user.getPassword(), password)) {
+                        startHomePageActivity(user);
+                        found = true;
+                    } else {
+                        Log.d(TAG, "Invalid credential " + password + " - " + user.getPassword());
+                        showError(3);
+                    }
+                }
+
+                if (!found) {
+                    Log.d(TAG, "Not found");
+                    showError(4);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        userQuery.addListenerForSingleValueEvent(listener);
+        userQuery.removeEventListener(listener);
+    }
+
+    private void startHomePageActivity(User user) {
+        Log.d(TAG, "Successful login " + user.getName() + " " + user.getEmail() + user.getPassword());
     }
 
     private boolean validEmail(String email) {
@@ -105,6 +143,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case 3:
                 msg = "Invalid credential";
+                break;
+
+            case 4:
+                msg = "Email not present in database. sign up?";
                 break;
         }
 

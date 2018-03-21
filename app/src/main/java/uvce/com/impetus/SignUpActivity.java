@@ -1,12 +1,18 @@
 package uvce.com.impetus;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
             emailField, passwordField;
 
     TextView errorField;
+    DatabaseReference rootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
         errorField = findViewById(R.id.errorField);
+
+        rootRef = FirebaseDatabase.getInstance().getReference();
 
         Button signUp = findViewById(R.id.signupButton);
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -82,12 +91,44 @@ public class SignUpActivity extends AppCompatActivity {
         createNewUser(user, password);
     }
 
-    private void createNewUser(User user, String password) {
+    private void createNewUser(final User user, String password) {
         Log.d(TAG, "Creating new user: " + user.getName() + " " +
                 user.getCollege() + " "
                 + user.getBranch() + " "
                 + user.getYear() + " "
-                + user.getEmail());
+                + user.getEmail()
+                + password);
+
+        final DatabaseReference userRef = rootRef.child("users");
+        final DatabaseReference countRef = rootRef.child("users").child("count");
+
+        ValueEventListener listener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int count = Integer.parseInt(dataSnapshot.getValue().toString());
+                count += 1;
+
+                Log.d(TAG, "User id " + count);
+                userRef.child(String.valueOf(count)).setValue(user);
+                countRef.setValue(count);
+                Log.d(TAG, "User added to database successfully");
+
+                startHomePageActivity(user);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "Database error during sign up: " + databaseError.getMessage());
+            }
+        };
+
+        rootRef.addListenerForSingleValueEvent(listener);
+        countRef.removeEventListener(listener);
+    }
+
+    private void startHomePageActivity(User user) {
+        // transition to home page.
     }
 
     private boolean validEmail(String email) {

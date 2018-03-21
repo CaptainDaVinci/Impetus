@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class User {
     private String name, college, branch, email, password;
     private int year;
-    private ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>();
 
     public  User() {
         // for firebase.
@@ -20,8 +20,6 @@ public class User {
         branch = _branch;
         password = _password;
         year = _year;
-
-        events = new ArrayList<>();
     }
 
     public String getName() {
@@ -46,5 +44,9 @@ public class User {
 
     public ArrayList<Event> getEvents() {
         return events;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
