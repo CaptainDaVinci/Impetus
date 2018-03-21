@@ -13,7 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "APPATHON";
+    public static final String TAG = "APPATHON";
 
     private DatabaseReference mDatabase;
     private User user;
@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
 
+        errorField.setVisibility(View.VISIBLE);
         errorField.setText(msg);
     }
 }

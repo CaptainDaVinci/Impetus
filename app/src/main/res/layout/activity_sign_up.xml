@@ -65,6 +65,7 @@
         android:text="sign up"
         android:layout_below="@id/errorField"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent"
+        android:onClick="onClick"/>
 
 </RelativeLayout>
