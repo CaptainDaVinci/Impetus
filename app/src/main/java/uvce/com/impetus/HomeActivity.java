@@ -1,5 +1,7 @@
 package uvce.com.impetus;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -28,8 +30,9 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     private static final String TAG = LoginActivity.TAG;
+    public static final String USERSESSION = "usersession";
+
     private ArrayList<Event> eventList;
     private EventAdapter eventAdapter;
     private User user;
@@ -56,8 +59,14 @@ public class HomeActivity extends AppCompatActivity
         user = (User) getIntent().getSerializableExtra("User");
         Log.d(TAG, "User: " + user.showInfo());
 
+        SharedPreferences sharedPreferences = getSharedPreferences(USERSESSION, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("userId", user.getId());
+        editor.apply();
+
+
         eventList = new ArrayList<>();
-        eventAdapter = new EventAdapter(eventList, getApplicationContext());
+        eventAdapter = new EventAdapter(eventList);
 
         Log.d(TAG, "Populating event list");
         populateEventList();
@@ -100,7 +109,8 @@ public class HomeActivity extends AppCompatActivity
                             image
                     );
 
-                    event.setAdmin(user.isEventAdmin(id));
+                    event.setRegistered(user.isParticipatingInEvent(id));
+                    event.setAdmin(user.isSuperAdmin() || user.isEventAdmin(id));
                     eventList.add(event);
                 }
 
@@ -176,7 +186,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.scheduleEvents) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -190,7 +200,7 @@ public class HomeActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

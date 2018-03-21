@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/nameField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Event name"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold|italic"
+                    android:textSize="24sp"
+                    android:layout_marginBottom="15dp"/>
+
+                <TextView
+                    android:id="@+id/descriptionField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Some description"
+                    android:layout_below="@id/nameField"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/venueLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/descriptionField"
+                    android:layout_marginTop="10dp"
+                    android:text="Venue: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/venueField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/venueLabel"
+                    android:layout_alignBaseline="@+id/venueLabel"
+                    android:layout_marginStart="10dp"
+                    android:text="venue"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/roundsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/venueField"
+                    android:text="Rounds: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/roundField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/roundsLabel"
+                    android:layout_toEndOf="@+id/roundsLabel"
+                    android:layout_marginStart="10dp"
+                    android:text="Round"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/teamsSizeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/roundField"
+                    android:text="Team size: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/teamsSizeField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/teamsSizeLabel"
+                    android:layout_toEndOf="@+id/teamsSizeLabel"
+                    android:layout_marginStart="10dp"
+                    android:text="Team size"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/startTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/teamsSizeField"
+                    android:text="Start: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/startTimeField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/startTimeLabel"
+                    android:layout_toEndOf="@+id/startTimeLabel"
+                    android:text="Start"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/endTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/startTimeField"
+                    android:text="End: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/endTimeField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/endTimeLabel"
+                    android:layout_toEndOf="@+id/endTimeLabel"
+                    android:layout_marginStart="10dp"
+                    android:text="End"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+
+                <TextView
+                    android:id="@+id/coordinatorNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/endTimeField"
+                    android:layout_marginTop="15dp"
+                    android:text="Coordinator Name: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/coordinatorNameField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/coordinatorNameLabel"
+                    android:layout_toEndOf="@+id/coordinatorNameLabel"
+                    android:layout_marginStart="10dp"
+                    android:text="Name"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/coordinatorContactLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/coordinatorNameField"
+                    android:text="Contact: "
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/coordinatorContactField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/coordinatorContactLabel"
+                    android:layout_toEndOf="@+id/coordinatorContactLabel"
+                    android:layout_marginStart="10dp"
+                    android:autoLink="phone"
+                    android:text="+91 1234 567 890"
+                    android:textColorLink="@android:color/holo_blue_dark"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"/>
+
+
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#999299"
+                    android:layout_below="@id/coordinatorContactField">
+                </View>
+
+                <Button
+                    android:id="@+id/registerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/divider"
+                    android:layout_marginStart="10dp"
+                    android:background="#0ab913"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="10dp"
+                    android:text="Register"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

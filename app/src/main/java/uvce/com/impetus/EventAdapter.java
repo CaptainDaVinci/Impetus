@@ -1,6 +1,8 @@
 package uvce.com.impetus;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,18 +13,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by captaindavinci on 27/10/17.
- */
-
 class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
     private static String TAG = LoginActivity.TAG;
     private ArrayList<Event> eventList;
-    private Context context;
 
-    EventAdapter(ArrayList<Event> _eventList, Context c) {
+    EventAdapter(ArrayList<Event> _eventList) {
         eventList = _eventList;
-        context = c;
     }
 
     @Override
@@ -49,7 +45,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
         private TextView nameField, venueField,
                 roundsField, startTimeField, endTimeField;
         private Button infoButton, registerButton, viewRegistrations;
-
+        private View view;
         private Event event;
 
         void bindEventInfo(Event _event) {
@@ -63,14 +59,21 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
 
             if (event.isAdmin()) {
                 viewRegistrations.setVisibility(View.VISIBLE);
+                registerButton.setText("Admin");
+                registerButton.setBackgroundColor(Color.BLUE);
+            } else if (event.isRegistered()) {
+                registerButton.setText("Registered");
+                registerButton.setBackgroundColor(Color.RED);
             } else {
+                registerButton.setText("Register");
+                registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
                 viewRegistrations.setVisibility(View.GONE);
             }
         }
 
         EventHolder(View itemView) {
             super(itemView);
-
+            view = itemView;
 
             nameField = itemView.findViewById(R.id.nameField);
             venueField = itemView.findViewById(R.id.venueField);
@@ -90,21 +93,29 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
         private View.OnClickListener infoListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Info clicked");
+                Intent intent = new Intent(view.getContext(), EventInfoActivity.class);
+                intent.putExtra("eventId", event.getId());
+                intent.putExtra("event", event);
+                view.getContext().startActivity(intent);
             }
         };
 
         private View.OnClickListener registerListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Register clicked");
+                if (event.isRegistered()) return;
+
+                Intent intent = new Intent(view.getContext(), RegisterActivity.class);
+                intent.putExtra("event", event);
+                view.getContext().startActivity(intent);
             }
         };
 
         private View.OnClickListener viewRegistrationsListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "View registered clicked");
+                Intent intent = new Intent(view.getContext(), RegisteredActivity.class);
+                view.getContext().startActivity(intent);
             }
         };
     }

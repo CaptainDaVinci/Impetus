@@ -22,15 +22,38 @@
                 android:text="Event name"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                android:textSize="24sp"/>
+                android:textSize="24sp"
+                android:layout_marginBottom="15dp"/>
+
+
+            <TextView
+                android:id="@+id/venueLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameField"
+                android:text="Venue: "
+                android:textStyle="italic"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
 
             <TextView
                 android:id="@+id/venueField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/nameField"
-                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/venueLabel"
+                android:layout_alignBaseline="@+id/venueLabel"
+                android:layout_marginStart="10dp"
                 android:text="venue"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/roundsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/venueField"
+                android:text="Rounds: "
+                android:textStyle="italic"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"/>
 
@@ -38,8 +61,20 @@
                 android:id="@+id/roundField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/venueField"
+                android:layout_alignBaseline="@+id/roundsLabel"
+                android:layout_toEndOf="@+id/roundsLabel"
+                android:layout_marginStart="10dp"
                 android:text="Round"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/startTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/roundField"
+                android:text="Start: "
+                android:textStyle="italic"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"/>
 
@@ -47,8 +82,19 @@
                 android:id="@+id/startTimeField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/roundField"
+                android:layout_alignBaseline="@+id/startTimeLabel"
+                android:layout_toEndOf="@+id/roundsLabel"
                 android:text="Start"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/endTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/startTimeField"
+                android:text="End: "
+                android:textStyle="italic"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"/>
 
@@ -56,7 +102,9 @@
                 android:id="@+id/endTimeField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/startTimeField"
+                android:layout_alignBaseline="@+id/endTimeLabel"
+                android:layout_toEndOf="@+id/endTimeLabel"
+                android:layout_marginStart="10dp"
                 android:text="End"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"/>
@@ -70,6 +118,7 @@
                 android:background="#999299"
                 android:layout_below="@id/endTimeField">
             </View>
+
 
             <Button
                 android:id="@+id/infoButton"
@@ -103,7 +152,6 @@
                 android:layout_marginStart="10dp"
                 android:background="@android:drawable/ic_menu_view"
                 android:visibility="gone"/>
-
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

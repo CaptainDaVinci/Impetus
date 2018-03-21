@@ -1,14 +1,14 @@
 package uvce.com.impetus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event {
+public class Event implements Serializable {
     private int id, rounds;
-    private String name, description, venue;
-    private String coordinatorName, contact;
+    private String name, venue;
     private String day1, day2;
     private String image;
-    private boolean admin;
+    private boolean admin, registered;
     public ArrayList<Integer> registeredUsers;
 
     public int getId() {
@@ -35,20 +35,16 @@ public class Event {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
     }
 
     public String getVenue() {
         return venue;
-    }
-
-    public String getCoordinatorName() {
-        return coordinatorName;
-    }
-
-    public String getContact() {
-        return contact;
     }
 
     public int getRounds() {

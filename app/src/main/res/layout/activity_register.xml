@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/eventNameField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event name"
+        android:textColor="@android:color/black"
+        android:textStyle="bold|italic"
+        android:textSize="24sp"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/venueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventNameField"
+        android:text="Venue: "
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/venueField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/venueLabel"
+        android:layout_alignBaseline="@+id/venueLabel"
+        android:layout_marginStart="10dp"
+        android:text="venue"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/timeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/venueField"
+        android:text="Time: "
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/timeField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/timeLabel"
+        android:layout_toEndOf="@+id/timeLabel"
+        android:layout_marginStart="10dp"
+        android:text="time"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <LinearLayout
+        android:id="@+id/teamInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeField"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/teamember1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user name"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            />
+
+        <EditText
+            android:id="@+id/teamember2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Team member 2"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            />
+
+        <EditText
+            android:id="@+id/teamember3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Team member 3"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+
+            />
+
+        <EditText
+            android:id="@+id/teamember4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Team member 4"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/errorField"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/teamInfoLayout"
+        android:layout_marginTop="20dp"
+        android:background="#000">
+    </View>
+
+    <TextView
+        android:id="@+id/eventFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/div1"
+        android:textColor="#e41313"
+        android:layout_alignParentEnd="true"
+        android:textSize="18sp"
+        android:text="@string/eventFee"/>
+
+    <TextView
+        android:id="@+id/foodFee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventFee"
+        android:textColor="#e41313"
+        android:layout_alignParentEnd="true"
+        android:textSize="18sp"
+        android:text="@string/foodFee"/>
+
+    <View
+        android:id="@+id/div2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/foodFee"
+        android:layout_marginTop="20dp"
+        android:background="#000">
+    </View>
+
+    <TextView
+        android:id="@+id/feeLabel"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/div2"
+        android:textColor="#e41313"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/fee"/>
+
+
+    <Button
+        android:id="@+id/paytmButton"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feeLabel"
+        android:layout_centerHorizontal="true"
+        android:text="Pay using PayTm"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/paytmButton"
+        android:layout_alignBaseline="@+id/paytmButton"
+        android:layout_below="@+id/feeLabel"
+        android:layout_centerHorizontal="true"
+        android:text="Cancel"/>
+
+</RelativeLayout>
+
+</ScrollView>
