@@ -117,7 +117,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void startHomePageActivity(User user) {
-        Log.d(TAG, "Successful login " + user.getName() + " " + user.getEmail() + user.getPassword());
+        Log.d(TAG, "Successful login " + user.showInfo());
+
+        Intent homePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
+        homePageIntent.putExtra("User", user);
+        startActivity(homePageIntent);
+        finish();
     }
 
     private boolean validEmail(String email) {

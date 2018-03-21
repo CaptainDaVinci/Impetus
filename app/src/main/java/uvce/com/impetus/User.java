@@ -1,18 +1,21 @@
 package uvce.com.impetus;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
+
     private String name, college, branch, email, password;
+    private boolean superAdmin;
     private int year;
-    private ArrayList<Event> events = new ArrayList<>();
+    private long events;
+    private long eventAdmin;
 
     public  User() {
         // for firebase.
     }
 
-    public User(String _name, String _email, String _college,
-                String _branch, String _password, int _year) {
+    User(String _name, String _email, String _college,
+         String _branch, String _password, int _year) {
 
         name = _name;
         email = _email;
@@ -20,33 +23,57 @@ public class User {
         branch = _branch;
         password = _password;
         year = _year;
+
+        superAdmin = false;
+        events = eventAdmin = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getCollege() {
+    String getCollege() {
         return college;
     }
 
-    public String getBranch() {
+    String getBranch() {
         return branch;
     }
 
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
-    public int getYear() {
+    int getYear() {
         return year;
     }
 
-    public ArrayList<Event> getEvents() {
+    String getPassword() {
+        return password;
+    }
+
+    public boolean isSuperAdmin() {
+        return superAdmin;
+    }
+
+    public long getEvents() {
         return events;
     }
 
-    public String getPassword() {
-        return password;
+    public long getEventAdmin() {
+        return eventAdmin;
+    }
+
+    public boolean isEventAdmin(int eventId) {
+        return (eventAdmin & (1 << eventId)) != 0;
+    }
+
+    public boolean isParticipatingInEvent(int eventId) {
+        return (events & (1 << eventId)) != 0;
+    }
+
+    public String showInfo() {
+        return name + " " + college + " " + branch + " " + " " + year + " "
+                + email + " " + password;
     }
 }

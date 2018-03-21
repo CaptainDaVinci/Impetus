@@ -1,5 +1,6 @@
 package uvce.com.impetus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -112,7 +113,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.d(TAG, "User id " + count);
                 userRef.child(String.valueOf(count)).setValue(user);
                 countRef.setValue(count);
-                Log.d(TAG, "User added to database successfully");
 
                 startHomePageActivity(user);
             }
@@ -123,12 +123,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
         };
 
-        rootRef.addListenerForSingleValueEvent(listener);
+        countRef.addListenerForSingleValueEvent(listener);
         countRef.removeEventListener(listener);
     }
 
     private void startHomePageActivity(User user) {
         // transition to home page.
+        Log.d(TAG, "Successful sign up " + user.showInfo());
+
+        Intent homePageIntent = new Intent(SignUpActivity.this, HomeActivity.class);
+        homePageIntent.putExtra("User", user);
+        startActivity(homePageIntent);
+        finish();
     }
 
     private boolean validEmail(String email) {

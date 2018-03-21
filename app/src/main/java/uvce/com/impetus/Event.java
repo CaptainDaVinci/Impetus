@@ -1,28 +1,28 @@
 package uvce.com.impetus;
 
 public class Event {
-    private int id;
-    private String name, description;
+    private int id, rounds;
+    private String name, description, venue;
     private Coordinator coordinator;
-    private int rounds;
     private String startTime, endTime;
-
-    public Event(int _id, String _name, String _description,
-                Coordinator _coordinator,
-                String _start, String _end,
-                int _rounds) {
-
-        id = _id;
-        name = _name;
-        description = _description;
-        coordinator = new Coordinator(_coordinator);
-        rounds = _rounds;
-        startTime = _start;
-        endTime = _end;
-    }
 
     public int getId() {
         return id;
+    }
+
+    public Event(int _id, int _rounds,
+                 String _name, String _description, String _venue,
+                 Coordinator _coordinator,
+                 String _start, String _end) {
+
+        id = _id;
+        rounds = _rounds;
+        name = _name;
+        venue = _venue;
+        description = _description;
+        coordinator = new Coordinator(_coordinator);
+        startTime = _start;
+        endTime = _end;
     }
 
     public String getName() {
