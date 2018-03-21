@@ -17,6 +17,8 @@ public class SignUpActivity extends AppCompatActivity {
     EditText nameField, collegeField, branchField, yearField,
             emailField, passwordField;
 
+    TextView errorField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +32,13 @@ public class SignUpActivity extends AppCompatActivity {
         yearField = findViewById(R.id.yearField);
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
+        errorField = findViewById(R.id.errorField);
 
         Button signUp = findViewById(R.id.signupButton);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                errorField.setVisibility(View.GONE);
                 validateInput();
             }
         });
@@ -44,11 +48,11 @@ public class SignUpActivity extends AppCompatActivity {
         Log.d(TAG, "Validating input");
 
         String name = nameField.getText().toString();
-        String college = nameField.getText().toString();
-        String branch = nameField.getText().toString();
-        String year = nameField.getText().toString();
-        String email = nameField.getText().toString();
-        String password = nameField.getText().toString();
+        String college = collegeField.getText().toString();
+        String branch = branchField.getText().toString();
+        String year = yearField.getText().toString();
+        String email = emailField.getText().toString();
+        String password = passwordField.getText().toString();
 
         if (name.isEmpty() || college.isEmpty() || branch.isEmpty() ||
                 year.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -75,10 +79,10 @@ public class SignUpActivity extends AppCompatActivity {
         Log.d(TAG, "Valid input");
 
         User user = new User(name, email, college, branch, password, yearInt);
-        createNewUser(user);
+        createNewUser(user, password);
     }
 
-    private void createNewUser(User user) {
+    private void createNewUser(User user, String password) {
         Log.d(TAG, "Creating new user: " + user.getName() + " " +
                 user.getCollege() + " "
                 + user.getBranch() + " "
@@ -96,7 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void showError(int errorCode) {
-        TextView errorField = findViewById(R.id.errorField);
         String msg = "";
 
         switch (errorCode) {

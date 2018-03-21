@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText emailField;
     private EditText passwordField;
+    private TextView errorField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mDatabase = FirebaseDatabase.getInstance().getReference();
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
+        errorField = findViewById(R.id.errorField);
     }
 
     @Override
     public void onClick(View view) {
+        errorField.setVisibility(View.GONE);
+
         switch (view.getId()) {
             case R.id.loginButton:
                 Log.d(TAG, "Login button clicked");
@@ -88,7 +92,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void showError(int errorCode) {
-        TextView errorField = findViewById(R.id.errorField);
         String msg = "";
 
         switch (errorCode) {
