@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity
         // starts here.
 
         User user = (User) getIntent().getSerializableExtra("User");
-        Log.d(TAG, "User: "  + user.showInfo());
+        Log.d(TAG, "User: " + user.showInfo());
         if (user.isSuperAdmin()) {
             fab.setVisibility(View.VISIBLE);
         }

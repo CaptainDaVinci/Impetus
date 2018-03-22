@@ -74,6 +74,6 @@ public class User implements Serializable {
 
     public String showInfo() {
         return name + " " + college + " " + branch + " " + " " + year + " "
-                + email + " " + password;
+                + email + " " + password +  " " + superAdmin + " " + eventAdmin + " " + events;
     }
 }
