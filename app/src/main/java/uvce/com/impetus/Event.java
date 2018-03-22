@@ -79,4 +79,12 @@ public class Event {
         return id + " " + name + " " + venue + " "
                 + rounds + " " + day1 + " " + day2;
     }
+
+    public String getStartTime() {
+        return "Start time";
+    }
+
+    public String getEndTime() {
+        return "End time";
+    }
 }

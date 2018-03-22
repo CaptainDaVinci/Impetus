@@ -1,8 +1,11 @@
 package uvce.com.impetus;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -28,6 +31,8 @@ public class HomeActivity extends AppCompatActivity
 
     private static final String TAG = LoginActivity.TAG;
     private ArrayList<Event> eventList;
+    private EventAdapter eventAdapter;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +53,32 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // starts here.
-        User user = (User) getIntent().getSerializableExtra("User");
+        user = (User) getIntent().getSerializableExtra("User");
         Log.d(TAG, "User: " + user.showInfo());
 
+        eventList = new ArrayList<>();
+        eventAdapter = new EventAdapter(eventList, getApplicationContext());
+
+        Log.d(TAG, "Populating event list");
         populateEventList();
+
+        Log.d(TAG, "Populating recycler view");
+        populateRecyclerView();
+    }
+
+    private void populateRecyclerView() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setNestedScrollingEnabled(false);
+
+        int spacing = getResources().getDimensionPixelSize(R.dimen.spacing);
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacing));
+        mRecyclerView.setAdapter(eventAdapter);
     }
 
     void populateEventList() {
-        Log.d(TAG, "Populating list view");
-
-        eventList = new ArrayList<>();
-
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference eventRef = rootRef.child("Events");
 
@@ -80,10 +100,12 @@ public class HomeActivity extends AppCompatActivity
                             image
                     );
 
+                    event.setAdmin(user.isEventAdmin(id));
                     eventList.add(event);
                 }
 
-                Log.d(TAG, "Added " + eventList.size() + " events");
+                eventAdapter.notifyDataSetChanged();
+                Log.d(TAG, "Event list populated with " + eventList.size() + " events");
             }
 
             @Override
@@ -94,6 +116,26 @@ public class HomeActivity extends AppCompatActivity
 
         eventRef.addListenerForSingleValueEvent(listener);
         eventRef.removeEventListener(listener);
+    }
+
+    private class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+        private int space;
+
+        SpacesItemDecoration(int spacing) {
+            this.space = spacing;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view,
+                                   RecyclerView parent, RecyclerView.State state) {
+            outRect.bottom = space;
+
+            if (parent.getChildLayoutPosition(view) == 0) {
+                outRect.top = space;
+            } else {
+                outRect.top = 0;
+            }
+        }
     }
 
 
@@ -109,7 +151,6 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }

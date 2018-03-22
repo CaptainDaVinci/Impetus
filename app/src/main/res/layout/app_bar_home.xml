@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="#b7b6b6"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
@@ -22,6 +23,7 @@
     <include layout="@layout/content_home" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/appbar"
         android:layout_width="match_parent"
