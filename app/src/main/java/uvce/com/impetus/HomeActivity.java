@@ -15,10 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = LoginActivity.TAG;
+    private ArrayList<Event> eventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +37,6 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,17 +48,58 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // starts here.
-
         User user = (User) getIntent().getSerializableExtra("User");
         Log.d(TAG, "User: " + user.showInfo());
-        if (user.isSuperAdmin()) {
-            fab.setVisibility(View.VISIBLE);
-        }
+
+        populateEventList();
     }
+
+    void populateEventList() {
+        Log.d(TAG, "Populating list view");
+
+        eventList = new ArrayList<>();
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference eventRef = rootRef.child("Events");
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Integer id = snapshot.child("id").getValue(Integer.class);
+                    Integer rounds = snapshot.child("rounds").getValue(Integer.class);
+                    String name = snapshot.child("name").getValue(String.class);
+                    String venue = snapshot.child("venue").getValue(String.class);
+                    String image =  snapshot.child("image").getValue(String.class);
+                    String day1 = snapshot.child("Day1").getValue(String.class);
+                    String day2 = snapshot.child("Day2").getValue(String.class);
+
+                    Event event = new Event(
+                            id, rounds, name, venue,
+                            day1, day2,
+                            image
+                    );
+
+                    eventList.add(event);
+                }
+
+                Log.d(TAG, "Added " + eventList.size() + " events");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        eventRef.addListenerForSingleValueEvent(listener);
+        eventRef.removeEventListener(listener);
+    }
+
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

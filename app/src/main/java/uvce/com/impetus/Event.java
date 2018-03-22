@@ -1,5 +1,7 @@
 package uvce.com.impetus;
 
+import java.util.ArrayList;
+
 public class Event {
     private int id, rounds;
     private String name, description, venue;
@@ -7,14 +9,14 @@ public class Event {
     private String day1, day2;
     private String image;
     private boolean admin;
+    public ArrayList<Integer> registeredUsers;
 
     public int getId() {
         return id;
     }
 
     public Event(int _id, int _rounds,
-                 String _name, String _description, String _venue,
-                 String _coordinatorName, String _contact,
+                 String _name, String _venue,
                  String _day1, String _day2,
                 String _image) {
 
@@ -22,9 +24,6 @@ public class Event {
         rounds = _rounds;
         name = _name;
         venue = _venue;
-        description = _description;
-        coordinatorName = _coordinatorName;
-        contact = _contact;
         day1 = _day1;
         day2 = _day2;
         image = _image;
@@ -74,5 +73,10 @@ public class Event {
 
     public void setAdmin(boolean _admin) {
         admin = _admin;
+    }
+
+    public String getInfo() {
+        return id + " " + name + " " + venue + " "
+                + rounds + " " + day1 + " " + day2;
     }
 }

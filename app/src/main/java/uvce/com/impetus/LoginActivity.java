@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.signupButton:
-                Log.d(TAG, "Signup button clicked");
                 handleSignup();
                 break;
         }
@@ -91,7 +90,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean found = false;
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "Got: " + snapshot.toString());
                     User user = snapshot.getValue(User.class);
                     assert user != null;
                     if (Objects.equals(user.getEmail(), email) &&
