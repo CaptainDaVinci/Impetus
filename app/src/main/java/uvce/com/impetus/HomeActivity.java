@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity
 
         SharedPreferences sharedPreferences = getSharedPreferences(USERSESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("User id", user.getId());
+        editor.putInt("userId", user.getId());
         editor.apply();
 
 
@@ -109,6 +109,7 @@ public class HomeActivity extends AppCompatActivity
                             image
                     );
 
+                    event.setRegistered(user.isParticipatingInEvent(id));
                     event.setAdmin(user.isSuperAdmin() || user.isEventAdmin(id));
                     eventList.add(event);
                 }

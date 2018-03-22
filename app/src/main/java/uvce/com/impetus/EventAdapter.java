@@ -2,6 +2,7 @@ package uvce.com.impetus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,7 +59,14 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
 
             if (event.isAdmin()) {
                 viewRegistrations.setVisibility(View.VISIBLE);
+                registerButton.setText("Admin");
+                registerButton.setBackgroundColor(Color.BLUE);
+            } else if (event.isRegistered()) {
+                registerButton.setText("Registered");
+                registerButton.setBackgroundColor(Color.RED);
             } else {
+                registerButton.setText("Register");
+                registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
                 viewRegistrations.setVisibility(View.GONE);
             }
         }
@@ -87,6 +95,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), EventInfoActivity.class);
                 intent.putExtra("eventId", event.getId());
+                intent.putExtra("event", event);
                 view.getContext().startActivity(intent);
             }
         };
@@ -94,7 +103,10 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
         private View.OnClickListener registerListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (event.isRegistered()) return;
+
                 Intent intent = new Intent(view.getContext(), RegisterActivity.class);
+                intent.putExtra("event", event);
                 view.getContext().startActivity(intent);
             }
         };

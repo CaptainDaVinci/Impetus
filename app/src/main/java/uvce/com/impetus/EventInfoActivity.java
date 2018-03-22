@@ -1,6 +1,7 @@
 package uvce.com.impetus;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,17 +23,21 @@ public class EventInfoActivity extends AppCompatActivity {
                     teamSizeField, startField, endField,
                     coordinatorNameField, contactField;
 
+    private Event event;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
 
         final int eventId = getIntent().getIntExtra("eventId", -1);
+        event = (Event) getIntent().getSerializableExtra("event");
 
-        if (eventId == -1) {
+        if (eventId == -1 || event == null) {
             Toast.makeText(getApplicationContext(), "Some error occured!", Toast.LENGTH_LONG).show();
             return ;
         }
+
 
         Log.d(TAG, "Getting event info for " + eventId);
 
@@ -47,6 +52,18 @@ public class EventInfoActivity extends AppCompatActivity {
         contactField = findViewById(R.id.coordinatorContactField);
 
         Button registerButton = findViewById(R.id.registerButton);
+
+        if (event.isAdmin()) {
+            registerButton.setText("Admin");
+            registerButton.setBackgroundColor(Color.BLUE);
+        } else if (event.isRegistered()) {
+            registerButton.setText("Registered");
+            registerButton.setBackgroundColor(Color.RED);
+        } else {
+            registerButton.setText("Register");
+            registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
+        }
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
