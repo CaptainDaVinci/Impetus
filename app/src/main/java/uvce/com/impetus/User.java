@@ -6,7 +6,7 @@ public class User implements Serializable {
 
     private String name, college, branch, email, password;
     private boolean superAdmin;
-    private int year;
+    private int year, id;
     private long events;
     private long eventAdmin;
 
@@ -66,6 +66,14 @@ public class User implements Serializable {
 
     public boolean isEventAdmin(int eventId) {
         return (eventAdmin & (1 << eventId)) != 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int _id) {
+        id = _id;
     }
 
     public boolean isParticipatingInEvent(int eventId) {

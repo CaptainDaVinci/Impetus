@@ -109,9 +109,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int count = Integer.parseInt(dataSnapshot.getValue().toString());
                 count += 1;
+                user.setId(count);
 
                 Log.d(TAG, "User id " + count);
                 userRef.child(String.valueOf(count)).setValue(user);
+                userRef.child(String.valueOf(count)).child("eventsRegistered").child("count").setValue(0);
                 countRef.setValue(count);
 
                 startHomePageActivity(user);
