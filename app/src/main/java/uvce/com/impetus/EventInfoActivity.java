@@ -54,7 +54,7 @@ public class EventInfoActivity extends AppCompatActivity {
 
         if (event.isAdmin()) {
             registerButton.setText("Admin");
-            registerButton.setBackgroundColor(Color.BLUE);
+            registerButton.setBackgroundColor(Color.GRAY);
         } else if (event.isRegistered()) {
             registerButton.setText("Key");
             registerButton.setBackgroundColor(Color.BLUE);
@@ -66,6 +66,12 @@ public class EventInfoActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (event.isAdmin()) {
+                    Toast.makeText(getApplicationContext(), "Admins can't register!",
+                            Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+
                 Intent intent;
                 if (event.isRegistered()) {
                     intent = new Intent(view.getContext(), ConfirmKeyActivity.class);

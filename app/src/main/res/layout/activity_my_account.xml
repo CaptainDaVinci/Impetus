@@ -1,7 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_account_circle_black_24dp"/>
+
+        <TextView
+            android:id="@+id/nameField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_alignBaseline="@+id/icon"/>
+
+        <View
+            android:id="@+id/div"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/icon"
+            android:background="#4b4a4a">
+        </View>
+
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:id="@+id/college_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="College name goes here"
+            android:layout_below="@+id/nameField"
+            android:textColor="@android:color/black"
+            android:autoLink="phone"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/branch_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Branch goes here"
+            android:layout_below="@id/college_field"
+            android:textColor="@android:color/black"
+            android:autoLink="phone"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/year_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year goes here"
+            android:layout_below="@id/college_field"
+            android:layout_toEndOf="@+id/branch_field"
+            android:layout_marginStart="15dp"
+            android:textColor="@android:color/black"
+            android:autoLink="phone"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_marginTop="7dp"
+            android:id="@+id/email_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email goes here "
+            android:layout_below="@+id/year_field"
+            android:textColor="@android:color/black"
+            android:autoLink="email"
+            android:textSize="17sp" />
+
+        <View
+            android:id="@+id/div2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/email_field"
+            android:background="#4b4a4a">
+        </View>
+
+        <TextView
+            android:id="@+id/eventsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Events Registered"
+            android:layout_below="@+id/div2"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/eventsCount">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

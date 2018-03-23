@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
             if (event.isAdmin()) {
                 viewRegistrations.setVisibility(View.VISIBLE);
                 registerButton.setText("Admin");
-                registerButton.setBackgroundColor(Color.BLUE);
+                registerButton.setBackgroundColor(Color.GRAY);
             } else if (event.isRegistered()) {
                 registerButton.setText("Key");
                 registerButton.setBackgroundColor(Color.BLUE);
@@ -100,6 +101,12 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
         private View.OnClickListener registerListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (event.isAdmin()) {
+                    Toast.makeText(view.getContext(), "Admins can't register!",
+                            Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+
                 Intent intent;
                 if (event.isRegistered()) {
                     intent = new Intent(view.getContext(), ConfirmKeyActivity.class);
