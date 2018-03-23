@@ -31,7 +31,6 @@ public class NotificationActivity extends AppCompatActivity {
         notifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Sending. . .", Toast.LENGTH_LONG).show();
                 publish(bodyField.getText().toString(), topicField.getSelectedItem().toString());
                 finish();
             }
@@ -44,10 +43,12 @@ public class NotificationActivity extends AppCompatActivity {
             return ;
         }
 
-        if (body.length() > 30) {
-            Toast.makeText(getApplicationContext(), "Notification Body should be < 30 characters", Toast.LENGTH_SHORT).show();
+        if (body.length() > 60) {
+            Toast.makeText(getApplicationContext(), "Notification Body should be < 60 characters", Toast.LENGTH_SHORT).show();
             return ;
         }
+
+        Toast.makeText(getApplicationContext(), "Sending. . .", Toast.LENGTH_LONG).show();
 
         final DatabaseReference newsRef = FirebaseDatabase.getInstance().getReference().child("News");
         final DatabaseReference newsCountRef = newsRef.child("count");
