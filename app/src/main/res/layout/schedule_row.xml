@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:background="#fff"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/eventNameField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event name"
+        android:textStyle="bold|italic"
+        android:layout_centerVertical="true"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_add_black_24dp"/>
+</RelativeLayout>

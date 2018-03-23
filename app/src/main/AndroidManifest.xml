@@ -36,7 +36,8 @@
         <activity android:name=".RegisteredActivity" />
         <activity android:name=".ConfirmKeyActivity" />
         <activity android:name=".ViewAllActivity" />
-        <activity android:name=".MyAccountActivity"></activity>
+        <activity android:name=".MyAccountActivity" />
+        <activity android:name=".ScheduleActivity"></activity>
     </application>
 
 </manifest>
