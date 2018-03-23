@@ -8,20 +8,34 @@
         android:id="@+id/bodyField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:hint="Body" />
 
-    <EditText
-        android:id="@+id/topic"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/topicLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Topic"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/bodyField"/>
+
+    <Spinner
+        android:id="@+id/topicSpinner"
+        android:entries="@array/topicSpinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bodyField"
-        android:hint="Topic"/>
+        android:layout_marginStart="15dp"
+        android:layout_toRightOf="@+id/topicLabel">
+    </Spinner>
+
 
     <Button
         android:id="@+id/notifyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topic"
+        android:layout_below="@id/topicSpinner"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:text="send"/>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,7 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class NotificationActivity extends AppCompatActivity {
-    private EditText bodyField, topicField;
+    private EditText bodyField;
+    private Spinner topicField;
     private Button notifyButton;
 
     @Override
@@ -23,13 +25,14 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
 
         bodyField = findViewById(R.id.bodyField);
-        topicField = findViewById(R.id.topic);
+        topicField = findViewById(R.id.topicSpinner);
         notifyButton = findViewById(R.id.notifyButton);
 
         notifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                publish(bodyField.getText().toString(), topicField.getText().toString());
+                Toast.makeText(getApplicationContext(), "Sending. . .", Toast.LENGTH_LONG).show();
+                publish(bodyField.getText().toString(), topicField.getSelectedItem().toString());
             }
         });
     }
@@ -49,8 +52,8 @@ public class NotificationActivity extends AppCompatActivity {
                 int count = dataSnapshot.getValue(Integer.class);
                 count += 1;
 
-                newsRef.child(String.valueOf(count)).child("body").setValue(body);
-                newsRef.child(String.valueOf(count)).child("topic").setValue(topic);
+                String msg = topic + body;
+                newsRef.child(String.valueOf(count)).child("body").setValue(msg);
                 newsCountRef.setValue(count);
             }
 

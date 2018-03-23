@@ -9,4 +9,18 @@
     <string name="fee">Fees:  \u20B9 30</string>
     <string name="eventFee">Event Fees: + \u20B9 20</string>
     <string name="foodFee">Food: + \u20B9 10</string>
+
+    <string-array name="topicSpinner">
+        <item>ALLL</item>
+        <item>LATG</item>
+        <item>MEBK</item>
+        <item>RBSC</item>
+        <item>GAME</item>
+        <item>TECH</item>
+        <item>ITWIZ</item>
+        <item>AUTO</item>
+        <item>TEMK</item>
+        <item>SPTM</item>
+        <item>APPT</item>
+    </string-array>
 </resources>
