@@ -260,7 +260,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(RegisterActivity.this, ConfirmKeyActivity.class);
                 intent.putExtra("eventId", event.getId());
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
 
                 startActivity(intent);
                 finish();

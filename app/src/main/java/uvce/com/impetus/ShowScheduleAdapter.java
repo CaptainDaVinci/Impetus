@@ -13,18 +13,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
+class ShowScheduleAdapter extends RecyclerView.Adapter<ShowScheduleAdapter.EventHolder> {
     private static String TAG = LoginActivity.TAG;
     private ArrayList<Event> eventList;
 
-    EventAdapter(ArrayList<Event> _eventList) {
-        eventList = _eventList;
+    ShowScheduleAdapter(ArrayList<Event> _eventList) {
+        eventList = new ArrayList<>(_eventList);
     }
 
     @Override
-    public EventAdapter.EventHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ShowScheduleAdapter.EventHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.event_item, parent, false);
+                .inflate(R.layout.schedule_event_item, parent, false);
 
         return new EventHolder(inflatedView);
     }
@@ -44,7 +44,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
     static class EventHolder extends RecyclerView.ViewHolder {
         private TextView nameField, venueField,
                 roundsField, startTimeField, endTimeField;
-        private Button infoButton, registerButton, viewRegistrations;
+        private Button infoButton;
         private View view;
         private Event event;
 
@@ -75,19 +75,6 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
 
             startTimeField.setText(day1);
             endTimeField.setText(day2);
-
-            if (event.isAdmin()) {
-                viewRegistrations.setVisibility(View.VISIBLE);
-                registerButton.setText("Admin");
-                registerButton.setBackgroundColor(Color.GRAY);
-            } else if (event.isRegistered()) {
-                registerButton.setText("Key");
-                registerButton.setBackgroundColor(Color.BLUE);
-            } else {
-                registerButton.setText("Register");
-                registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
-                viewRegistrations.setVisibility(View.GONE);
-            }
         }
 
         EventHolder(View itemView) {
@@ -101,12 +88,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
             endTimeField = itemView.findViewById(R.id.endTimeField);
 
             infoButton = itemView.findViewById(R.id.infoButton);
-            registerButton = itemView.findViewById(R.id.registerButton);
-            viewRegistrations = itemView.findViewById(R.id.viewRegisteredButton);
-
             infoButton.setOnClickListener(infoListener);
-            registerButton.setOnClickListener(registerListener);
-            viewRegistrations.setOnClickListener(viewRegistrationsListener);
         }
 
         private View.OnClickListener infoListener = new View.OnClickListener() {
@@ -115,40 +97,8 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
 
                 Intent intent = new Intent(view.getContext(), EventInfoActivity.class);
                 intent.putExtra("event", event);
+                intent.putExtra("schedule", true);
 
-                view.getContext().startActivity(intent);
-            }
-        };
-
-        private View.OnClickListener registerListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (event.isAdmin()) {
-                    Toast.makeText(view.getContext(), "Admins can't register!",
-                            Toast.LENGTH_SHORT).show();
-                    return ;
-                }
-
-
-                Intent intent;
-
-                if (event.isRegistered()) {
-                    intent = new Intent(view.getContext(), ConfirmKeyActivity.class);
-                    intent.putExtra("eventId", event.getId());
-                } else {
-                    intent = new Intent(view.getContext(), RegisterActivity.class);
-                    intent.putExtra("event", event);
-                }
-
-                view.getContext().startActivity(intent);
-            }
-        };
-
-        private View.OnClickListener viewRegistrationsListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), RegisteredActivity.class);
-                intent.putExtra("eventId", event.getId());
                 view.getContext().startActivity(intent);
             }
         };

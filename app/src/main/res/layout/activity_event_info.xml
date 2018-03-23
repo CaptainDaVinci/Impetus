@@ -106,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/teamsSizeField"
-                    android:text="Start: "
+                    android:text="Day 1: "
                     android:textStyle="italic"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"/>
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/startTimeField"
-                    android:text="End: "
+                    android:text="Day 2: "
                     android:textStyle="italic"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"/>

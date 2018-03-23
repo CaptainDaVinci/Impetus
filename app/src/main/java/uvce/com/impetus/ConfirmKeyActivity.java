@@ -34,6 +34,7 @@ public class ConfirmKeyActivity extends AppCompatActivity {
         confirmField = findViewById(R.id.confirmKeyField);
         homeButton = findViewById(R.id.homeButton);
 
+
         SharedPreferences preferences = getSharedPreferences(HomeActivity.USERSESSION, MODE_PRIVATE);
         int userId = preferences.getInt("userId", -1);
         int eventId = getIntent().getIntExtra("eventId", -1);

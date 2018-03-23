@@ -24,6 +24,7 @@ public class EventInfoActivity extends AppCompatActivity {
                     coordinatorNameField, contactField;
 
     private Event event;
+    private boolean fromSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class EventInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_info);
 
         event = (Event) getIntent().getSerializableExtra("event");
+        fromSchedule = getIntent().getBooleanExtra("schedule", false);
 
         if (event == null) {
             Toast.makeText(getApplicationContext(), "Some error occured!", Toast.LENGTH_LONG).show();
@@ -51,6 +53,9 @@ public class EventInfoActivity extends AppCompatActivity {
         contactField = findViewById(R.id.coordinatorContactField);
 
         Button registerButton = findViewById(R.id.registerButton);
+        if (fromSchedule) {
+            registerButton.setVisibility(View.GONE);
+        }
 
         if (event.isAdmin()) {
             registerButton.setText("Admin");
@@ -62,6 +67,7 @@ public class EventInfoActivity extends AppCompatActivity {
             registerButton.setText("Register");
             registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
         }
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +107,6 @@ public class EventInfoActivity extends AppCompatActivity {
                     Integer rounds = snapshot.child("rounds").getValue(Integer.class);
                     String name = snapshot.child("name").getValue(String.class);
                     String venue = snapshot.child("venue").getValue(String.class);
-                    String day1 = snapshot.child("Day1").getValue(String.class);
-                    String day2 = snapshot.child("Day2").getValue(String.class);
                     Integer teamSize = snapshot.child("teamSize").getValue(Integer.class);
                     String description = snapshot.child("description").getValue(String.class);
                     String coordinatorName = snapshot.child("eventCoordinator").getValue(String.class);
@@ -115,6 +119,25 @@ public class EventInfoActivity extends AppCompatActivity {
                     teamSizeField.setText(String.valueOf(teamSize));
                     coordinatorNameField.setText(coordinatorName);
                     contactField.setText(contact);
+
+                    String day1 = "NA";
+                    if (!event.getDay1().equals("-1")) {
+                        day1 = event.getDay1();
+                    }
+
+                    if (event.getDay1().equals("allday")) {
+                        day1 = "All day";
+                    }
+
+                    String day2 = "NA";
+                    if (!event.getDay2().equals("-1")) {
+                        day2 = event.getDay2();
+                    }
+
+                    if (event.getDay2().equals("allday")) {
+                        day2 = "All day";
+                    }
+
                     startField.setText(day1);
                     endField.setText(day2);
                 }

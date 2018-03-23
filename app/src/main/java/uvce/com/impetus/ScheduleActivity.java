@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +25,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private static ArrayList<Event> scheduleEventList = new ArrayList<>();
     private ArrayList<Event> eventList;
     private User user;
+    private int clashCount = 0;
     private ScheduleAdapter scheduleAdapter;
 
     @Override
@@ -36,6 +38,7 @@ public class ScheduleActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("User");
 
         eventList = new ArrayList<>();
+        scheduleEventList.clear();
         scheduleAdapter = new ScheduleAdapter(eventList);
 
         populateEventList();
@@ -68,6 +71,7 @@ public class ScheduleActivity extends AppCompatActivity {
                     event.setAdmin(user.isSuperAdmin() || user.isEventAdmin(id));
                     eventList.add(event);
                 }
+
 
                 scheduleAdapter.notifyDataSetChanged();
                 Log.d(TAG, "Event list populated with " + eventList.size() + " events");
@@ -144,6 +148,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         if (id == R.id.schedule) {
             Log.d(TAG, "Events scheduled: " + scheduleEventList.size());
+            clashCount = 0;
             detectClashes();
             return true;
         }
@@ -152,6 +157,49 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void detectClashes() {
+        boolean collides = false;
+        for (int i = 0; i < scheduleEventList.size() && !collides; ++i) {
+            if (scheduleEventList.get(i).allDay()) {
+                continue;
+            }
 
+            for (int j = i + 1; j < scheduleEventList.size() && !collides; ++j) {
+                if (scheduleEventList.get(j).allDay()) {
+                    continue;
+                }
+
+                if (scheduleEventList.get(i).collidesWith(scheduleEventList.get(j))) {
+                    Log.d(TAG, scheduleEventList.get(i).getName() + " collides with " + scheduleEventList.get(j).getName());
+
+                    ScheduleAdapter.eventCheck[scheduleEventList.get(i).getId()] = false;
+                    ScheduleAdapter.eventCheck[scheduleEventList.get(j).getId()] = false;
+
+                    scheduleAdapter.notifyDataSetChanged();
+
+                    scheduleEventList.remove(j);
+                    scheduleEventList.remove(i);
+                    collides = true;
+
+                    if (clashCount == 0) {
+                        Toast.makeText(getApplicationContext(), "Clashes detected resolving . . .", Toast.LENGTH_SHORT).show();
+                    }
+
+                    ++clashCount;
+                }
+            }
+        }
+
+        if (collides) {
+            detectClashes();
+        } else if (clashCount != 0) {
+            Toast.makeText(getApplicationContext(),"resolved, please schedule now", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(ScheduleActivity.this, ShowScheduleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("schedulelist", scheduleEventList);
+            intent.putExtra("BUNDLE", bundle);
+
+            startActivity(intent);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package uvce.com.impetus;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.EventHolder> {
     private static String TAG = LoginActivity.TAG;
     private ArrayList<Event> eventList;
-    private static boolean[] eventCheck;
+    public static boolean[] eventCheck;
 
     ScheduleAdapter(ArrayList<Event> _eventList) {
         eventList = _eventList;
@@ -54,6 +55,14 @@ class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.EventHolder> 
                 addButton.setBackgroundResource(R.drawable.ic_check_black_24dp);
             } else {
                 addButton.setBackgroundResource(R.drawable.ic_add_black_24dp);
+            }
+
+            if (event.isAdmin() || !event.registrationPossible()) {
+                nameField.setTextColor(Color.GRAY);
+                addButton.setVisibility(View.GONE);
+            } else {
+                nameField.setTextColor(Color.BLACK);
+                addButton.setVisibility(View.VISIBLE);
             }
         }
 

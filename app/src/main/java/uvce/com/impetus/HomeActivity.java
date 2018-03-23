@@ -28,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,6 +75,7 @@ public class HomeActivity extends AppCompatActivity
         populateEventList();
 
         Log.d(TAG, "Populating recycler view");
+
         populateRecyclerView();
     }
 
@@ -114,6 +117,8 @@ public class HomeActivity extends AppCompatActivity
                     event.setAdmin(user.isSuperAdmin() || user.isEventAdmin(id));
                     eventList.add(event);
                 }
+
+                Collections.sort(eventList);
 
                 eventAdapter.notifyDataSetChanged();
                 Log.d(TAG, "Event list populated with " + eventList.size() + " events");
