@@ -1,5 +1,6 @@
 package uvce.com.impetus;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +18,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.TAG;
     private TextView nameField, venueField, timeField, fees, member1;
     private EditText member2, member3, member4;
     private User user;
     private Event event;
+    private String confirmKey;
     DatabaseReference rootRef;
 
     @Override
@@ -111,28 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 Button pay = findViewById(R.id.paytmButton);
-                pay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (member2.getVisibility() == View.GONE) {
-                            processPayment();
-                        } else if (member2.getText().toString().isEmpty()) {
-                            throwError();
-                        } else if (member3.getVisibility() == View.GONE) {
-                            processPayment();
-                        } else if (member3.getText().toString().isEmpty()) {
-                            throwError();
-                        } else if (member4.getVisibility() == View.GONE) {
-                            processPayment();
-                        } else if (member4.getText().toString().isEmpty()) {
-                            throwError();
-                        } else {
-                            processPayment();
-                        }
-                    }
-                });
-
-                Button cancel = findViewById(R.id.cancelButton);
+                final Button cancel = findViewById(R.id.cancelButton);
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -140,6 +123,32 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+
+                pay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (member2.getVisibility() == View.GONE) {
+                            processPayment();
+                            cancel.setVisibility(View.GONE);
+                        } else if (member2.getText().toString().isEmpty()) {
+                            throwError();
+                        } else if (member3.getVisibility() == View.GONE) {
+                            processPayment();
+                            cancel.setVisibility(View.GONE);
+                        } else if (member3.getText().toString().isEmpty()) {
+                            throwError();
+                        } else if (member4.getVisibility() == View.GONE) {
+                            processPayment();
+                            cancel.setVisibility(View.GONE);
+                        } else if (member4.getText().toString().isEmpty()) {
+                            throwError();
+                        } else {
+                            processPayment();
+                            cancel.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
             }
 
             @Override
@@ -160,7 +169,26 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void processPayment() {
         Log.d(TAG, "Processing payment...");
+
+        confirmKey = generateConfirmationKey();
+        Log.d(TAG, "Confirmation key: " + confirmKey);
+
         addUserToEvent();
+    }
+
+    private String generateConfirmationKey() {
+        String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        StringBuilder key = new StringBuilder();
+        Random rnd = new Random();
+
+        while (key.length() < 8) {
+            int index = (int) (rnd.nextFloat() * CHARS.length());
+            key.append(CHARS.charAt(index));
+        }
+
+        return key.toString();
+
     }
 
     private void addUserToEvent() {
@@ -179,10 +207,11 @@ public class RegisterActivity extends AppCompatActivity {
                     count += 1;
 
                     ref.child("count").setValue(count);
-                    ref.child("usersRegistered").child(String.valueOf(count)).child("name").setValue(user.getName());
-                    ref.child("usersRegistered").child(String.valueOf(count)).child("college").setValue(user.getCollege());
+                    ref.child("usersRegistered").child(String.valueOf(count)).child("userId").setValue(user.getId());
+                    ref.child("usersRegistered").child(String.valueOf(count)).child("attended").setValue(false);
+                    ref.child("usersRegistered").child(String.valueOf(count)).child("confirmKey").setValue(confirmKey);
 
-                    Log.d(TAG, "User, " + user.getId() + " registered for " + event.getId()
+                    Log.d(TAG, "USER ADDED: " + user.getId() + " registered for " + event.getId()
                             + " successfully");
                 }
 
@@ -203,6 +232,7 @@ public class RegisterActivity extends AppCompatActivity {
         Log.d(TAG, "Adding event to user " + user.getId());
         final DatabaseReference usersRef = rootRef.child("users");
         final Query userRef = usersRef.orderByChild("id").equalTo(user.getId());
+        int count = 0;
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
@@ -221,12 +251,19 @@ public class RegisterActivity extends AppCompatActivity {
                     count += 1;
 
                     ref.child("count").setValue(count);
-                    ref.child("event").child(String.valueOf(count)).child("name").setValue(event.getName());
-                    ref.child("event").child(String.valueOf(count)).child("id").setValue(event.getId());
+                    ref.child("event").child(String.valueOf(count)).child("eventId").setValue(event.getId());
+                    ref.child("event").child(String.valueOf(count)).child("confirmKey").setValue(confirmKey);
 
-                    Log.d(TAG, "Event, " + event.getId() + " added to " + user.getId()
+                    Log.d(TAG, "EVENT ADDED: " + event.getId() + " added to " + user.getId()
                             + " successfully");
                 }
+
+                Intent intent = new Intent(RegisterActivity.this, ConfirmKeyActivity.class);
+                intent.putExtra("eventId", event.getId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent);
+                finish();
             }
 
             @Override

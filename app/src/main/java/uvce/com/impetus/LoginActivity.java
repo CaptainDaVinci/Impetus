@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean found = false;
+                boolean found = false, invalid = false;
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
                     assert user != null;
@@ -99,11 +99,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         found = true;
                     } else {
                         Log.d(TAG, "Invalid credential " + password + " - " + user.getPassword());
+                        invalid = true;
                         showError(3);
                     }
                 }
 
-                if (!found) {
+                if (!found && !invalid) {
                     Log.d(TAG, "Not found");
                     showError(4);
                 }

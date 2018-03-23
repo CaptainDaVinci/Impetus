@@ -30,16 +30,15 @@ public class EventInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
 
-        final int eventId = getIntent().getIntExtra("eventId", -1);
         event = (Event) getIntent().getSerializableExtra("event");
 
-        if (eventId == -1 || event == null) {
+        if (event == null) {
             Toast.makeText(getApplicationContext(), "Some error occured!", Toast.LENGTH_LONG).show();
             return ;
         }
 
 
-        Log.d(TAG, "Getting event info for " + eventId);
+        Log.d(TAG, "Getting event info for " + event.getId());
 
         nameField = findViewById(R.id.nameField);
         descriptionField = findViewById(R.id.descriptionField);
@@ -57,8 +56,8 @@ public class EventInfoActivity extends AppCompatActivity {
             registerButton.setText("Admin");
             registerButton.setBackgroundColor(Color.BLUE);
         } else if (event.isRegistered()) {
-            registerButton.setText("Registered");
-            registerButton.setBackgroundColor(Color.RED);
+            registerButton.setText("Key");
+            registerButton.setBackgroundColor(Color.BLUE);
         } else {
             registerButton.setText("Register");
             registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
@@ -67,13 +66,22 @@ public class EventInfoActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EventInfoActivity.this, RegisterActivity.class);
-                intent.putExtra("eventId", eventId);
+                Intent intent;
+                if (event.isRegistered()) {
+                    intent = new Intent(view.getContext(), ConfirmKeyActivity.class);
+                } else {
+                    intent = new Intent(EventInfoActivity.this, RegisterActivity.class);
+                    intent.putExtra("event", event);
+                }
+
+                intent.putExtra("eventId", event.getId());
+
                 startActivity(intent);
+                finish();
             }
         });
 
-        getEventInfo(eventId);
+        getEventInfo(event.getId());
     }
 
     public void getEventInfo(int eventId) {

@@ -1,10 +1,8 @@
 package uvce.com.impetus;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +60,8 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
                 registerButton.setText("Admin");
                 registerButton.setBackgroundColor(Color.BLUE);
             } else if (event.isRegistered()) {
-                registerButton.setText("Registered");
-                registerButton.setBackgroundColor(Color.RED);
+                registerButton.setText("Key");
+                registerButton.setBackgroundColor(Color.BLUE);
             } else {
                 registerButton.setText("Register");
                 registerButton.setBackgroundColor(Color.parseColor("#0ed218"));
@@ -94,7 +92,6 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), EventInfoActivity.class);
-                intent.putExtra("eventId", event.getId());
                 intent.putExtra("event", event);
                 view.getContext().startActivity(intent);
             }
@@ -103,10 +100,15 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
         private View.OnClickListener registerListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (event.isRegistered()) return;
+                Intent intent;
+                if (event.isRegistered()) {
+                    intent = new Intent(view.getContext(), ConfirmKeyActivity.class);
+                    intent.putExtra("eventId", event.getId());
+                } else {
+                    intent = new Intent(view.getContext(), RegisterActivity.class);
+                    intent.putExtra("event", event);
+                }
 
-                Intent intent = new Intent(view.getContext(), RegisterActivity.class);
-                intent.putExtra("event", event);
                 view.getContext().startActivity(intent);
             }
         };
