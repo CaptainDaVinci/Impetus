@@ -95,8 +95,6 @@ public class RegisteredActivity extends AppCompatActivity {
                         addUser(userId, eventId);
                     }
                 }
-
-                viewUserAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -134,6 +132,7 @@ public class RegisteredActivity extends AppCompatActivity {
 
                 ViewUser viewUser = new ViewUser(user, key);
                 viewUsers.add(viewUser);
+                viewUserAdapter.notifyDataSetChanged();
             }
 
             @Override

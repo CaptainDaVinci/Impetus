@@ -86,9 +86,7 @@ public class ViewAllActivity extends AppCompatActivity {
                         continue;
                     }
 
-                    Log.d(TAG, "SNAPSHOT: " + snapshot.toString());
                     int eventCount = snapshot.child("events").getValue(Integer.class);
-
                     if (eventCount != 0) {
                         User user = snapshot.getValue(User.class);
                         ViewUser viewUser = new ViewUser(user, null);

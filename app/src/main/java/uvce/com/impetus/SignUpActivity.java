@@ -134,8 +134,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         String name = nameField.getText().toString();
         String college = collegeField.getText().toString();
-        String branch =yearField.getSelectedItem().toString();
-        String year = branchField.getSelectedItem().toString();
+        String branch = branchField.getSelectedItem().toString();
+        String year = yearField.getSelectedItem().toString();
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
         String confirmpassword = confirmpasswordField.getText().toString();
