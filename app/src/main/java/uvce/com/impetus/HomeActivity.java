@@ -58,9 +58,22 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+
         // starts here.
         user = (User) getIntent().getSerializableExtra("User");
         Log.d(TAG, "User: " + user.showInfo());
+
+        if (user.isSuperAdmin()) {
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(HomeActivity.this,NotificationActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         SharedPreferences sharedPreferences = getSharedPreferences(USERSESSION, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

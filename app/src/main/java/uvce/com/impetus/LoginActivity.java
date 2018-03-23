@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,6 +55,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.signupButton:
                 handleSignup();
+                break;
+
+            case R.id.bypass:
+                Toast.makeText(getApplicationContext(), "By passing...", Toast.LENGTH_SHORT).show();
+                handleLogin("yash@gmail.com", "12345678");
                 break;
         }
     }
