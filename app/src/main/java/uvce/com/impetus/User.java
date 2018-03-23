@@ -6,7 +6,8 @@ public class User implements Serializable {
 
     private String name, college, branch, email, password;
     private boolean superAdmin;
-    private int year, id;
+    private int id;
+    private String year;
     private long events;
     private long eventAdmin;
 
@@ -15,7 +16,7 @@ public class User implements Serializable {
     }
 
     User(String _name, String _email, String _college,
-         String _branch, String _password, int _year) {
+         String _branch, String _password, String _year) {
 
         name = _name;
         email = _email;
@@ -44,7 +45,7 @@ public class User implements Serializable {
         return email;
     }
 
-    int getYear() {
+    String getYear() {
         return year;
     }
 

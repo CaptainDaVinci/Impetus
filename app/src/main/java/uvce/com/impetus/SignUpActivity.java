@@ -100,7 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
         yearField.setAdapter(spinnerArrayAdapter1);
 
         //branchList spinner
-
         final ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<String>(
                 this,R.layout.spinner_banch,branchList){
             @Override
@@ -127,13 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
         };
         spinnerArrayAdapter2.setDropDownViewResource(R.layout.spinner_banch);
         branchField.setAdapter(spinnerArrayAdapter2);
-
     }
-
-
-
-
-
 
 
     private void validateInput() {
@@ -158,24 +151,19 @@ public class SignUpActivity extends AppCompatActivity {
             return ;
         }
 
-        int yearInt = Integer.parseInt(year);
-        if (yearInt < 1 || yearInt > 5) {
-            showError(3);
-            return ;
-        }
-
         if (password.length() < 8) {
             showError(4);
             return ;
         }
 
-        if(confirmpassword.compareTo(password)!=0){
+        if(confirmpassword.compareTo(password)!= 0){
             showError(5);
+            return ;
         }
 
         Log.d(TAG, "Valid input");
 
-        User user = new User(name, email, college, branch, password, yearInt);
+        User user = new User(name, email, college, branch, password, year);
         createNewUser(user, password);
     }
 
