@@ -61,10 +61,6 @@ public class User implements Serializable {
         return events;
     }
 
-    public long getEventAdmin() {
-        return eventAdmin;
-    }
-
     public boolean isEventAdmin(int eventId) {
         return (eventAdmin & (1 << eventId)) != 0;
     }

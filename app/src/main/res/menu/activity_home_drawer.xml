@@ -5,21 +5,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/scheduleEvents"
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="My Account"/>
+
+        <item
+            android:id="@+id/nav_schedule"
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="Plan my impetus" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_summary"
+            android:icon="@android:drawable/ic_menu_view"
+            android:title="Impetus registrations"
+            android:visible="true"
+            />
+
     </group>
 
     <item android:title="Communicate">
@@ -30,8 +31,8 @@
                 android:title="Share" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:icon="@android:drawable/ic_dialog_email"
+                android:title="Contact" />
         </menu>
     </item>
 

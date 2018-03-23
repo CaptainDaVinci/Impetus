@@ -117,6 +117,7 @@ class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(), RegisteredActivity.class);
+                intent.putExtra("eventId", event.getId());
                 view.getContext().startActivity(intent);
             }
         };

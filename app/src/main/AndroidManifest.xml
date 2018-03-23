@@ -34,7 +34,8 @@
         <activity android:name=".EventInfoActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".RegisteredActivity" />
-        <activity android:name=".ConfirmKeyActivity"></activity>
+        <activity android:name=".ConfirmKeyActivity" />
+        <activity android:name=".ViewAllActivity"></activity>
     </application>
 
 </manifest>

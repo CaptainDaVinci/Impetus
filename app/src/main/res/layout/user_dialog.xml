@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="7dp"
+        android:id="@+id/dialog_college_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="College name goes here"
+        android:textColor="@android:color/black"
+        android:autoLink="phone"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/dialog_branch_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Branch goes here"
+        android:layout_below="@id/dialog_college_field"
+        android:textColor="@android:color/black"
+        android:autoLink="phone"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/dialog_year_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Year goes here"
+        android:layout_below="@id/dialog_branch_field"
+        android:textColor="@android:color/black"
+        android:autoLink="phone"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_marginTop="7dp"
+        android:id="@+id/dialog_email_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_year_field"
+        android:layout_marginStart="20dp"
+        android:text="email goes here "
+        android:textColor="@android:color/black"
+        android:autoLink="email"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/dialog_key_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Key goes here"
+        android:layout_below="@id/dialog_email_field"
+        android:textColor="@android:color/black"
+        android:autoLink="phone"
+        android:textSize="16sp" />
+
+</RelativeLayout>
