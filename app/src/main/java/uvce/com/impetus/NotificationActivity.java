@@ -33,6 +33,7 @@ public class NotificationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Sending. . .", Toast.LENGTH_LONG).show();
                 publish(bodyField.getText().toString(), topicField.getSelectedItem().toString());
+                finish();
             }
         });
     }
@@ -40,6 +41,11 @@ public class NotificationActivity extends AppCompatActivity {
     private void publish(final String body, final String topic) {
         if (body.isEmpty() || topic.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Fields can't be empty", Toast.LENGTH_SHORT).show();
+            return ;
+        }
+
+        if (body.length() > 30) {
+            Toast.makeText(getApplicationContext(), "Notification Body should be < 30 characters", Toast.LENGTH_SHORT).show();
             return ;
         }
 

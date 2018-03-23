@@ -193,13 +193,15 @@ public class ScheduleActivity extends AppCompatActivity {
             detectClashes();
         } else if (clashCount != 0) {
             Toast.makeText(getApplicationContext(),"resolved, please schedule now", Toast.LENGTH_SHORT).show();
+        } else if (scheduleEventList.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No events scheduled", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent = new Intent(ScheduleActivity.this, ShowScheduleActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("schedulelist", scheduleEventList);
-            intent.putExtra("BUNDLE", bundle);
+                Intent intent = new Intent(ScheduleActivity.this, ShowScheduleActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("schedulelist", scheduleEventList);
+                intent.putExtra("BUNDLE", bundle);
 
-            startActivity(intent);
+                startActivity(intent);
         }
     }
 }

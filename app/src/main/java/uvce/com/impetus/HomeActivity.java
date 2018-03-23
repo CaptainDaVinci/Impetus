@@ -76,6 +76,9 @@ public class HomeActivity extends AppCompatActivity
                     startActivity(intent);
                 }
             });
+
+            Menu navMenu = navigationView.getMenu();
+            navMenu.findItem(R.id.nav_summary).setVisible(true);
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences(USERSESSION, Context.MODE_PRIVATE);

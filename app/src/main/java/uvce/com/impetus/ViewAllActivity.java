@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -95,6 +96,10 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
 
                 Log.d(TAG, userList.size() + " users found participating");
+                if (userList.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No users found, participating!", Toast.LENGTH_SHORT).show();
+                }
+
                 userAdapter.notifyDataSetChanged();
             }
 
