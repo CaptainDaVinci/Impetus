@@ -195,15 +195,10 @@ public class Event implements Serializable, Comparable<Event> {
                 return 1;
             }
 
-            Log.d(LoginActivity.TAG, "E1 " + name + " E2: " + e2.getName());
-
             String e1StartTime = getDay2StartTime();
             String e1EndTime = getDay2EndTime();
             String e2StartTime = e2.getDay2StartTime();
             String e2EndTime = e2.getDay2EndTime();
-
-            Log.d(LoginActivity.TAG, "E1: " + e1StartTime + "-" + e1EndTime);
-            Log.d(LoginActivity.TAG, "E2: " + e2StartTime + "-" + e2EndTime);
 
             Integer h1Start = Integer.parseInt(e1StartTime.charAt(0) + "" + e1StartTime.charAt(1));
             Integer h1End = Integer.parseInt(e1EndTime.charAt(0) + "" + e1EndTime.charAt(1));
@@ -234,15 +229,10 @@ public class Event implements Serializable, Comparable<Event> {
             return 1;
         }
 
-        Log.d(LoginActivity.TAG, "E1 " + name + " E2: " + e2.getName());
-
         String e1StartTime = getDay1StartTime();
         String e1EndTime = getDay1EndTime();
         String e2StartTime = e2.getDay1StartTime();
         String e2EndTime = e2.getDay1EndTime();
-
-        Log.d(LoginActivity.TAG, "E1: " + e1StartTime + "-" + e1EndTime);
-        Log.d(LoginActivity.TAG, "E2: " + e2StartTime + "-" + e2EndTime);
 
         Integer h1Start = Integer.parseInt(e1StartTime.charAt(0) + "" + e1StartTime.charAt(1));
         Integer h1End = Integer.parseInt(e1EndTime.charAt(0) + "" + e1EndTime.charAt(1));

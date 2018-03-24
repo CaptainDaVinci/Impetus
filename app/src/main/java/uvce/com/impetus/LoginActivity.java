@@ -56,11 +56,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.signupButton:
                 handleSignup();
                 break;
-
-            case R.id.bypass:
-                Toast.makeText(getApplicationContext(), "By passing...", Toast.LENGTH_SHORT).show();
-                handleLogin("yash@gmail.com", "12345678");
-                break;
         }
     }
 

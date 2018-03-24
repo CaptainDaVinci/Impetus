@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private String name, college, branch, email, password;
-    private boolean superAdmin;
-    private int id;
-    private String year;
-    private long events;
-    private long eventAdmin;
+    public String name, college, branch, email, password;
+    public boolean superAdmin;
+    public int id;
+    public String year;
+    public long events;
+    public long eventAdmin;
 
     public  User() {
         // for firebase.
