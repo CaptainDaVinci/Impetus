@@ -87,7 +87,17 @@ public class RegisterActivity extends AppCompatActivity {
 
         nameField.setText(event.getName());
         venueField.setText(event.getVenue());
-        timeField.setText(event.getDay1() + event.getDay2());
+
+        if (event.getDay1().equals("allday") || event.getDay2().equals("allday")) {
+            timeField.setText("All day");
+        } else if (event.getDay1().equals("-1")) {
+            timeField.setText(event.getDay2());
+        } else if (event.getDay2().equals("-1")) {
+            timeField.setText(event.getDay1());
+        } else {
+            timeField.setText(event.getDay1() + event.getDay2());
+        }
+
         member1.setText(user.getName());
 
         DatabaseReference eventsRef = FirebaseDatabase.getInstance().getReference().child("Events");
