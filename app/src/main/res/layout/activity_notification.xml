@@ -8,25 +8,26 @@
         android:id="@+id/bodyField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="Body" />
+        android:layout_marginBottom="20dp"
+        android:hint="Body maximum 60 characters" />
 
     <TextView
         android:id="@+id/topicLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Topic"
+        android:text="Topic:"
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:layout_below="@+id/bodyField"/>
 
     <Spinner
         android:id="@+id/topicSpinner"
+        android:textAlignment="center"
         android:entries="@array/topicSpinner"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bodyField"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="25dp"
         android:layout_toRightOf="@+id/topicLabel">
     </Spinner>
 
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/topicSpinner"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:text="send"/>
 </RelativeLayout>

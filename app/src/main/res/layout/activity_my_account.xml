@@ -36,17 +36,36 @@
         </View>
 
 
+        <Button
+            android:id="@+id/collegeLabel"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_account_balance_black_24dp"
+            android:layout_below="@id/div">
+        </Button>
+
         <TextView
             android:layout_marginTop="30dp"
             android:id="@+id/college_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/collegeLabel"
             android:text="College name goes here"
-            android:layout_below="@+id/nameField"
+            android:layout_marginStart="10dp"
+            android:textStyle="italic"
+            android:layout_alignBaseline="@+id/collegeLabel"
             android:textColor="@android:color/black"
-            android:autoLink="phone"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/branchLabel"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_import_contacts_black_24dp"
+            android:layout_below="@id/collegeLabel">
+        </Button>
 
         <TextView
             android:layout_marginTop="10dp"
@@ -54,7 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Branch goes here"
-            android:layout_below="@id/college_field"
+            android:layout_toEndOf="@+id/branchLabel"
+            android:layout_marginStart="10dp"
+            android:layout_alignBaseline="@+id/branchLabel"
             android:textColor="@android:color/black"
             android:autoLink="phone"
             android:textSize="16sp" />
@@ -65,12 +86,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Year goes here"
-            android:layout_below="@id/college_field"
             android:layout_toEndOf="@+id/branch_field"
+            android:layout_alignBaseline="@id/branchLabel"
             android:layout_marginStart="15dp"
             android:textColor="@android:color/black"
             android:autoLink="phone"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/emailLabel"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_email_black_24dp"
+            android:layout_below="@id/branchLabel">
+        </Button>
 
         <TextView
             android:layout_marginTop="7dp"
@@ -78,9 +108,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="email goes here "
-            android:layout_below="@+id/year_field"
+            android:layout_toEndOf="@+id/emailLabel"
+            android:layout_alignBaseline="@+id/emailLabel"
+            android:layout_marginStart="10dp"
             android:textColor="@android:color/black"
             android:autoLink="email"
+            android:textColorLink="0e5fc2"
             android:textSize="17sp" />
 
         <View

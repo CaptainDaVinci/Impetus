@@ -38,7 +38,7 @@
         android:layout_marginStart="10dp"
         android:text="venue"
         android:textSize="18sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/holo_purple"/>
 
     <TextView
         android:id="@+id/timeLabel"
@@ -59,7 +59,7 @@
         android:layout_marginStart="10dp"
         android:text="time"
         android:textSize="18sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/holo_orange_dark"/>
 
     <LinearLayout
         android:id="@+id/teamInfoLayout"
@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:text="user name"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             />
 
@@ -178,7 +179,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/feeLabel"
         android:layout_centerHorizontal="true"
-        android:text="Pay using PayTm"/>
+        android:padding="5dp"
+        android:background="#27e720"
+        android:textColor="#fff"
+        android:text="Pay via PayTm"/>
 
     <Button
         android:id="@+id/cancelButton"
@@ -188,6 +192,9 @@
         android:layout_toRightOf="@+id/paytmButton"
         android:layout_alignBaseline="@+id/paytmButton"
         android:layout_below="@+id/feeLabel"
+        android:layout_marginStart="10dp"
+        android:background="#e91919"
+        android:textColor="#fff"
         android:layout_centerHorizontal="true"
         android:text="Cancel"/>
 

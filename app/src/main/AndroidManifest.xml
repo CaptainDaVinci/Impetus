@@ -46,20 +46,27 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label="Upcoming Events"
             android:theme="@style/AppTheme.NoActionBar" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity android:name=".EventInfoActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".EventInfoActivity"
+            android:label="Event info"/>
+        <activity android:name=".RegisterActivity"
+            android:label="Register"/>
         <activity android:name=".RegisteredActivity" />
-        <activity android:name=".ConfirmKeyActivity" />
+        <activity android:name=".ConfirmKeyActivity"
+            android:label="Key"/>
         <activity android:name=".ViewAllActivity" />
-        <activity android:name=".MyAccountActivity" />
-        <activity android:name=".ScheduleActivity" />
-        <activity android:name=".ShowScheduleActivity" />
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".MyAccountActivity"
+            android:label="My account"/>
+        <activity android:name=".ScheduleActivity"
+            android:label="Scheduled events"/>
+        <activity android:name=".ShowScheduleActivity"
+            android:label="Scheduled events"/>
+        <activity android:name=".NotificationActivity"
+            android:label="Send Notification"/>
 
     </application>
 
