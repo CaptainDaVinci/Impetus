@@ -113,7 +113,7 @@
             android:layout_marginStart="10dp"
             android:textColor="@android:color/black"
             android:autoLink="email"
-            android:textColorLink="0e5fc2"
+            android:textColorLink="#0e5fc2"
             android:textSize="17sp" />
 
         <View
